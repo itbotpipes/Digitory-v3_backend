@@ -1,0 +1,149 @@
+{
+	"info": {
+		"name": "Digitory MVP Backend",
+		"description": "Complete collection to test all Digitory CMS MVP endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Authentication",
+			"item": [
+				{
+					"name": "Login (Get Token)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@digitory.com\",\n    \"password\": \"password123\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+					}
+				},
+				{
+					"name": "Get Profile (Me)",
+					"request": {
+						"method": "GET",
+						"header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+						"url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+						"url": { "raw": "{{baseUrl}}/users", "host": ["{{baseUrl}}"], "path": ["users"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Pages",
+			"item": [
+				{
+					"name": "Create Page",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"About Us\",\n    \"status\": \"Draft\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/pages", "host": ["{{baseUrl}}"], "path": ["pages"] }
+					}
+				},
+				{
+					"name": "Get All Pages",
+					"request": {
+						"method": "GET",
+						"header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+						"url": { "raw": "{{baseUrl}}/pages", "host": ["{{baseUrl}}"], "path": ["pages"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Posts (Blog)",
+			"item": [
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"My First Blog Post\",\n    \"content\": \"This is the rich text content of the blog...\",\n    \"status\": \"Published\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/posts", "host": ["{{baseUrl}}"], "path": ["posts"] }
+					}
+				},
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "GET",
+						"header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+						"url": { "raw": "{{baseUrl}}/posts", "host": ["{{baseUrl}}"], "path": ["posts"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "5. Dashboard",
+			"item": [
+				{
+					"name": "Get Stats",
+					"request": {
+						"method": "GET",
+						"header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+						"url": { "raw": "{{baseUrl}}/dashboard/stats", "host": ["{{baseUrl}}"], "path": ["dashboard", "stats"] }
+					}
+				}
+			]
+		},
+		{
+			"name": "6. Contact Messages (Public)",
+			"item": [
+				{
+					"name": "Submit Contact Form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"message\": \"I am interested in your CMS!\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": { "raw": "{{baseUrl}}/contact-messages", "host": ["{{baseUrl}}"], "path": ["contact-messages"] }
+					}
+				},
+				{
+					"name": "Admin View Messages",
+					"request": {
+						"method": "GET",
+						"header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+						"url": { "raw": "{{baseUrl}}/contact-messages", "host": ["{{baseUrl}}"], "path": ["contact-messages"] }
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000/api"
+		},
+		{
+			"key": "token",
+			"value": "PASTE_YOUR_TOKEN_HERE"
+		}
+	]
+}

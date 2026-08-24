@@ -1,0 +1,148 @@
+openapi: 3.0.0
+info:
+  title: Digitory CMS API
+  description: Backend MVP API documentation for the Digitory CMS
+  version: 1.0.0
+servers:
+  - url: /api
+    description: Local API Server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
+paths:
+  /auth/login:
+    post:
+      summary: Login to the CMS
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login successful
+  /auth/me:
+    get:
+      summary: Get current authenticated user
+      tags: [Auth]
+      responses:
+        '200':
+          description: User profile returned
+  /users:
+    get:
+      summary: Get paginated users
+      tags: [Users]
+      parameters:
+        - in: query
+          name: page
+          schema: { type: integer }
+        - in: query
+          name: limit
+          schema: { type: integer }
+        - in: query
+          name: search
+          schema: { type: string }
+      responses:
+        '200':
+          description: Success
+    post:
+      summary: Create a user
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                email: { type: string }
+                password: { type: string }
+                roleId: { type: string }
+      responses:
+        '201':
+          description: User created
+  /pages:
+    get:
+      summary: Get pages
+      tags: [Pages]
+      responses:
+        '200':
+          description: Success
+    post:
+      summary: Create a page
+      tags: [Pages]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                slug: { type: string }
+                status: { type: string }
+      responses:
+        '201':
+          description: Page created
+  /posts:
+    get:
+      summary: Get blogs
+      tags: [Posts]
+      security: []
+      responses:
+        '200':
+          description: Success
+    post:
+      summary: Create a blog
+      tags: [Posts]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                content: { type: string }
+                category: { type: string }
+      responses:
+        '201':
+          description: Post created
+  /media:
+    post:
+      summary: Upload a file
+      tags: [Media]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: File uploaded
+  /dashboard/stats:
+    get:
+      summary: Get dashboard counts
+      tags: [Dashboard]
+      responses:
+        '200':
+          description: Success
