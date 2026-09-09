@@ -53,6 +53,13 @@ const solutionSchema = new mongoose.Schema(
     opsTitle: { type: String },
     opsParagraph: { type: String },
     opsHighlights: { type: String },
+
+    // Homepage section custom settings
+    showOnHome: { type: Boolean, default: false },
+    homeTitle: { type: String },
+    homeDescription: { type: String },
+    homeImage: { type: String },
+    homeOrder: { type: Number, default: 0 },
     
     whyChoose: [whyChooseSchema],
     

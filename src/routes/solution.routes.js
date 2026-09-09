@@ -17,6 +17,7 @@ router.use(authenticate);
 router.use(authorize('manage_solutions'));
 
 router.post('/', createSolutionValidator, validate, asyncHandler(solutionController.createSolution));
+router.post('/:id/duplicate', asyncHandler(solutionController.duplicateSolution));
 router.put('/:id', updateSolutionValidator, validate, asyncHandler(solutionController.updateSolution));
 router.delete('/:id', asyncHandler(solutionController.deleteSolution));
 

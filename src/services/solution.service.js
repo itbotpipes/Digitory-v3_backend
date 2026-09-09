@@ -62,6 +62,35 @@ class SolutionService {
     await solutionRepository.delete(id);
     return true;
   }
+
+  async duplicateSolution(id) {
+    const solution = await solutionRepository.findById(id);
+    if (!solution) throw new ApiError(404, 'Solution not found');
+
+    const obj = solution.toObject();
+    delete obj._id;
+    delete obj.__v;
+    delete obj.createdAt;
+    delete obj.updatedAt;
+
+    const rawSlug = obj.slug || 'solution';
+    const baseSlug = rawSlug.replace(/-\d+$/, '');
+
+    let counter = 2;
+    let newSlug = `${baseSlug}-${counter}`;
+    while (await solutionRepository.findBySlug(newSlug)) {
+      counter++;
+      newSlug = `${baseSlug}-${counter}`;
+    }
+
+    obj.slug = newSlug;
+    obj.title = `${obj.title} (Copy)`;
+    if (obj.homeTitle) {
+      obj.homeTitle = `${obj.homeTitle} (Copy)`;
+    }
+
+    return await solutionRepository.create(obj);
+  }
 }
 
 module.exports = new SolutionService();

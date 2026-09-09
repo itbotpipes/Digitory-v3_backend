@@ -5,9 +5,11 @@ const linkSchema = require('./schemas/Link.schema');
 const settingsSchema = new mongoose.Schema(
   {
     branding: {
-      logo: { type: String, description: 'URL to logo image' },
+      logo: { type: String, description: 'URL to light mode logo image' },
+      logoWhite: { type: String, description: 'URL to dark mode logo image' },
       favicon: { type: String, description: 'URL to favicon' },
       companyName: { type: String, trim: true },
+      siteTitle: { type: String, trim: true, default: 'Digitory - Restaurant Operating System' },
     },
     defaultSeo: {
       type: seoSchema,
@@ -26,6 +28,13 @@ const settingsSchema = new mongoose.Schema(
     ],
     solutionsGridTitle: { type: String, default: 'Twelve powerful features to help your restaurant run better' },
     solutionsGridDesc: { type: String, default: 'Click on any feature card below to open its full specifications and details on a new page.' },
+    analytics: {
+      googleAnalyticsId: { type: String, trim: true },
+      googleTagManagerId: { type: String, trim: true },
+      facebookPixelId: { type: String, trim: true },
+      customHeadScripts: { type: String },
+      customBodyScripts: { type: String },
+    },
   },
   {
     timestamps: true,

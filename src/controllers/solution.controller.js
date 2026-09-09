@@ -29,6 +29,11 @@ class SolutionController {
     await solutionService.deleteSolution(req.params.id);
     res.status(200).json(new ApiResponse(200, null, 'Solution deleted successfully'));
   }
+
+  async duplicateSolution(req, res) {
+    const solution = await solutionService.duplicateSolution(req.params.id);
+    res.status(201).json(new ApiResponse(201, solution, 'Solution duplicated successfully'));
+  }
 }
 
 module.exports = new SolutionController();
