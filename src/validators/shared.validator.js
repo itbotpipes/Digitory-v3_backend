@@ -6,12 +6,29 @@ exports.createTestimonialValidator = [
   body('designation').optional().trim(),
   body('company').optional().trim(),
   body('image').optional().trim(),
+  body('videoUrl').optional().trim(),
+  body('posterUrl').optional().trim(),
+  body('stat').optional().trim(),
+  body('initials').optional().trim(),
+  body('role').optional().trim(),
+  body('location').optional().trim(),
+  body('order').optional().isInt().toInt(),
   body('status').optional().isIn(['Draft', 'Published']),
 ];
 
 exports.updateTestimonialValidator = [
   body('name').optional().trim().notEmpty(),
   body('quote').optional().trim().notEmpty(),
+  body('designation').optional().trim(),
+  body('company').optional().trim(),
+  body('image').optional().trim(),
+  body('videoUrl').optional().trim(),
+  body('posterUrl').optional().trim(),
+  body('stat').optional().trim(),
+  body('initials').optional().trim(),
+  body('role').optional().trim(),
+  body('location').optional().trim(),
+  body('order').optional().isInt().toInt(),
   body('status').optional().isIn(['Draft', 'Published']),
 ];
 

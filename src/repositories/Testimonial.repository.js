@@ -8,7 +8,7 @@ class TestimonialRepository {
   async paginate(page = 1, limit = 10, filters = {}) {
     const skip = (page - 1) * limit;
     const [docs, total] = await Promise.all([
-      Testimonial.find(filters).skip(skip).limit(limit).sort({ createdAt: -1 }),
+      Testimonial.find(filters).skip(skip).limit(limit).sort({ order: 1, createdAt: -1 }),
       Testimonial.countDocuments(filters)
     ]);
     return { docs, total, page, limit, totalPages: Math.ceil(total / limit) };
