@@ -84,6 +84,7 @@ const solutionSchema = new mongoose.Schema(
     ctaBlock: { type: simpleBlockSchema },
 
     category: { type: String },
+    categoryOrder: { type: Number, default: 0 },
     layerTitle: { type: String },
     layerDesc: { type: String },
     metricsTitle: { type: String },

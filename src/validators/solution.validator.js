@@ -19,6 +19,8 @@ exports.createSolutionValidator = [
   body('extraOwnersChoice').optional().isObject(),
   body('supportItems').optional().isArray(),
   body('securityItems').optional().isArray(),
+  body('category').optional().trim(),
+  body('categoryOrder').optional().toInt(),
   body('ctaBlock').optional().isObject(),
   body('seo').optional().isObject(),
 ];
@@ -42,6 +44,8 @@ exports.updateSolutionValidator = [
   body('extraOwnersChoice').optional().isObject(),
   body('supportItems').optional().isArray(),
   body('securityItems').optional().isArray(),
+  body('category').optional().trim(),
+  body('categoryOrder').optional().toInt(),
   body('ctaBlock').optional().isObject(),
   body('seo').optional().isObject(),
 ];
